@@ -97,9 +97,3 @@ jobs:
     - name: Build wheel
       run: |
         python -m build --wheel
-
-    - name: Store wheel
-      uses: actions/upload-artifact@v3
-      with:
-        name: wheel
-        path: dist/*.whl
