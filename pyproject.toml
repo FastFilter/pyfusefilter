@@ -39,3 +39,26 @@ before-all = "apt-get -y install libffi-dev"
 select = "*-musllinux*"
 before-all = "apk add libffi-dev"
 
+[tool.pdoc]
+# pdoc configuration
+name = "pyfusefilter"
+description = "Python bindings for C implementation of xor and fuse filters"
+version = "1.0.1"
+author = "Amey Narkhede & Daniel Lemire"
+author_email = "ameynarkhede02@gmail.com"
+url = "https://github.com/glitzflitz/pyfusefilter"
+
+# Documentation settings
+docstring_style = "google"
+show_source = true
+search = true
+math = false
+
+# Output settings
+output_directory = "docs"
+force = true
+html = true
+
+# Module settings
+modules = ["pyfusefilter"]
+

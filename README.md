@@ -133,7 +133,37 @@ python -m pdoc pyfusefilter --output-dir docs
 - On Linux, install development headers: `apt-get install python3-dev` (Ubuntu/Debian) or `yum install python3-devel` (CentOS/RHEL)
 
 
-## References
+## Documentation
+
+📚 **Live Documentation**: [https://fastfilter.github.io/pyfusefilter/](https://fastfilter.github.io/pyfusefilter/)
+
+The documentation is automatically generated from the code using [pdoc](https://pdoc.dev/) and deployed to GitHub Pages on every push to the main branch.
+
+### Setting up GitHub Pages
+
+To enable GitHub Pages for this repository:
+
+1. Go to **Settings** → **Pages**
+2. Under **Source**, select **GitHub Actions**
+3. The documentation will be available at: `https://fastfilter.github.io/pyfusefilter/`
+
+### Local Documentation
+
+To generate documentation locally:
+
+```bash
+# Install pdoc
+pip install pdoc
+
+# Generate documentation
+pdoc pyfusefilter --output-dir docs
+
+# View locally
+python -m http.server 8000
+# Open http://localhost:8000/docs/
+```
+
+### References
 
 - [Binary Fuse Filters: Fast and Smaller Than Xor Filters](http://arxiv.org/abs/2201.01174), Journal of Experimental Algorithmics 27, 2022.
 - [Xor Filters: Faster and Smaller Than Bloom and Cuckoo Filters](https://arxiv.org/abs/1912.08258), Journal of Experimental Algorithmics 25 (1), 2020
