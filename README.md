@@ -18,8 +18,6 @@ performance, and a small memory usage.
 ## Usage
 
 
-See our [API documentation](docs/index.html).
-
 The filters Xor8 and Fuse8 use slightly over a byte of memory per entry, with a false positive rate of about 0.39%.
 The filters Xor16 and Fuse16 use slightly over two bytes of memory per entry, with a false positive rate of about 0.0015%. For large sets, Fuse8 and Fuse16 filters use slightly more memory and they can be built
 faster.
