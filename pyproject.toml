@@ -3,7 +3,7 @@ py-modules = []
 # cffi-modules handled in setup.py
 [project]
 name = "pyfusefilter"
-version = "1.1.3"
+version = "1.1.4"
 description = "Python bindings for C implementation of xor and fuse filters"
 authors = [
     {name = "Amey Narkhede", email = "ameynarkhede02@gmail.com"},
@@ -15,7 +15,7 @@ license = {file = "LICENSE"}
 requires-python = ">=3.0"
 
 [project.urls]
-Homepage = "https://github.com/glitzflitz/pyfusefilter"
+Homepage = "tps://github.com/FastFilter/pyfusefilter"
 
 [build-system]
 requires = ["setuptools", "wheel", "cffi"]
@@ -43,7 +43,7 @@ before-all = "apk add libffi-dev"
 # pdoc configuration
 name = "pyfusefilter"
 description = "Python bindings for C implementation of xor and fuse filters"
-version = "1.1.3"
+version = "1.1.4"
 author = "Amey Narkhede & Daniel Lemire"
 author_email = "daniel@lemire.me"
 url = "https://github.com/FastFilter/pyfusefilter"
