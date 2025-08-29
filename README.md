@@ -37,8 +37,6 @@ True
 True
 >>> filter["か"]
 False
->>> filter.contains(150)
-False
 >>> filter.size_in_bytes()
 60
 ```

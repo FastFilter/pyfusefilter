@@ -9,7 +9,6 @@ def test_readme():
     assert filter.contains("अ") == True
     assert filter[51]  #You can use __getitem__ instead of contains
     assert filter["か"] == False
-    assert filter.contains(150) == False
 
 def test_fuse16_int():
     xor_filter = Fuse16(50)

@@ -51,7 +51,7 @@ jobs:
 
     - name: Generate documentation
       run: |
-        pdoc --config pyproject.toml pyfusefilter
+        pdoc pyfusefilter --output-dir docs --html --force --show-source --search --docformat google
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
