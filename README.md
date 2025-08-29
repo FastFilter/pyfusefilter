@@ -21,33 +21,36 @@ faster.
 
 
 ```py
->>> from pyfusefilter import Xor8, Xor16, Fuse8, Fuse16
->>> 
->>> #Supports unicode strings and heterogeneous types
->>> test_str = ["あ","अ", 51, 0.0, 12.3]
->>> filter = Xor8(test_str)	
-True
->>> filter.contains("अ")
-True
->>> filter[51]  #You can use __getitem__ instead of contains
-True
->>> filter["か"]
-False
->>> filter.size_in_bytes()
-60
+import pyfusefilter
+#Supports unicode strings and heterogeneous types
+filter = pyfusefilter.Xor8(["あ","अ", 51, 0.0, 12.3])	
+filter.contains("अ") # returns true
+# next returns true
+filter[51]  #You can use __getitem__ instead of contains
+filter["か"] # returns false
 ```
 
 
 The `size_in_bytes()` function gives the memory usage of the filter itself. It does not count
-the Python overhead which adds a few bytes to the actual memory usage.
+the Python overhead which adds a few bytes to the actual memory usage:
+
+```py
+filter.size_in_bytes()
+```
 
 You can serialize a filter with the `serialize()` method which returns a buffer, and you can recover the filter with the `deserialize(buffer)` method, which returns a filter:
 
 ```py
-> f = open('/tmp/output', 'wb')
-> f.write(filter.serialize())
-> f.close()
-> recoverfilter = Xor8.deserialize(open('/tmp/output', 'rb').read())
+import pyfusefilter
+import tempfile
+
+filter = pyfusefilter.Xor8(["あ","अ", 51, 0.0, 12.3])
+with tempfile.NamedTemporaryFile(delete=False) as tmp:
+    tmp.write(filter.serialize())
+    tmp_path = tmp.name
+with open(tmp_path, 'rb') as f:
+    recoverfilter = pyfusefilter.Xor8.deserialize(f.read())
+recoverfilter[51] # returns True
 ```
 
 The serialization format is as concise as possible and will typically use a few bytes
