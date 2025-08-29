@@ -9,7 +9,7 @@ If you work with large sets—such as thousands or millions of URLs, user IDs, o
 
 ## API
 
-[API Documentation](https://fastfilter.github.io/pyfusefilter/docs/pyfusefilter.html)
+[API Documentation](https://fastfilter.github.io/pyfusefilter/)
 
 ## Usage
 
