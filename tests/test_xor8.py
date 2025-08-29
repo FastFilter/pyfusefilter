@@ -1,4 +1,4 @@
-from pyxorfilter import Xor8
+from pyfusefilter import Xor8
 from random import sample
 import tempfile, os
 

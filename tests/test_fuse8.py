@@ -1,4 +1,4 @@
-from pyxorfilter import Fuse8
+from pyfusefilter import Fuse8
 from random import sample
 import tempfile, os
 

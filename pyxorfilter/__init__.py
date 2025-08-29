@@ -1,4 +1,4 @@
-from pyxorfilter.pyxorfilter import Xor8, Xor16, Fuse8, Fuse16
+from pyfusefilter.pyfusefilter import Xor8, Xor16, Fuse8, Fuse16
 
-VERSION = "1.1.20"
+VERSION = "1.0.0"
 __all__ = ["Xor8", "Xor16", "Fuse8", "Fuse16"]

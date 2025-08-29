@@ -1,4 +1,4 @@
-# pyxorfilter
+# pyfusefilter
 
 Python bindings for [C](https://github.com/FastFilter/xor_singleheader) implementation of [Xor Filters: Faster and Smaller Than Bloom and Cuckoo Filters](https://arxiv.org/abs/1912.08258)
 and of [Binary Fuse Filters: Fast and Smaller Than Xor Filters](https://arxiv.org/abs/2201.01174).
@@ -6,17 +6,17 @@ and of [Binary Fuse Filters: Fast and Smaller Than Xor Filters](https://arxiv.or
 
 
 ## Installation
-`pip install pyxorfilter`
+`pip install pyfusefilter`
 ### From Source
 ```
-git clone --recurse-submodules https://github.com/glitzflitz/pyxorfilter
-cd pyxorfilter
+git clone --recurse-submodules https://github.com/glitzflitz/pyfusefilter
+cd pyfusefilter
 python setup.py build_ext
 python setup.py install
 ```
 ## Usage
 ```py
->>> from pyxorfilter import Xor8, Xor16, Fuse8, Fuse16
+>>> from pyfusefilter import Xor8, Xor16, Fuse8, Fuse16
 >>> filter = Xor8(5)	#or Xor16(size)
 >>> #Supports unicode strings and heterogeneous types
 >>> test_str = ["あ","अ", 51, 0.0, 12.3]

@@ -1,6 +1,6 @@
 [project]
-name = "pyxorfilter"
-version = "1.1.20"
+name = "pyfusefilter"
+version = "1.0.0"
 description = "Python bindings for C implementation of xorfilter"
 authors = [
     {name = "Amey Narkhede", email = "ameynarkhede02@gmail.com"},
@@ -11,7 +11,7 @@ license = {text = "Apache 2.0"}
 requires-python = ">=3.0"
 
 [project.urls]
-Homepage = "https://github.com/glitzflitz/pyxorfilter"
+Homepage = "https://github.com/glitzflitz/pyfusefilter"
 
 [build-system]
 requires = ["setuptools", "wheel", "cffi"]
