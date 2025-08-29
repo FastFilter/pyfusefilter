@@ -15,11 +15,18 @@ python setup.py build_ext
 python setup.py install
 ```
 ## Usage
+
+The filters Xor8 and Fuse8 use slightly over a byte of memory per entry, with a false positive rate of about 0.39%.
+The filters Xor16 and Fuse16 use slightly over two bytes of memory per entry, with a false positive rate of about 0.0015%.
+
+
+
 ```py
 >>> from pyfusefilter import Xor8, Xor16, Fuse8, Fuse16
->>> filter = Xor8(5)	#or Xor16(size)
+>>> 
 >>> #Supports unicode strings and heterogeneous types
 >>> test_str = ["あ","अ", 51, 0.0, 12.3]
+>>> filter = Xor8(len(test_str))	#or Xor16(size)
 >>> filter.populate(test_str)
 True
 >>> filter.contains("अ")
@@ -42,6 +49,24 @@ You can serialize a filter with the `serialize()` method which returns a buffer,
 > f.close()
 > recoverfilter = Xor8.deserialize(open('/tmp/output', 'rb').read())
 ```
+
+## Measuring data usage
+
+The `size_in_bytes()` function gives the memory usage of the filter itself. The actual memory usage is slightly higher (there is a small constant overhead) due to
+Python metadata.
+
+```python
+    from pyfusefilter import Xor8, Fuse8
+
+    N = 100
+    while (N < 10000000):
+        filter = Xor8(len(data))
+        fusefilter = Fuse8(len(data))
+        print(N, filter.size_in_bytes()/N, fusefilter.size_in_bytes()/N)
+        N *= 10
+
+```
+
 
 ## False-positive rate
 For more accuracy(less false positives) use larger but more accurate Xor16 for Fuse16.
