@@ -1,11 +1,6 @@
 # pyfusefilter
 
-Python bindings for [C](https://github.com/FastFilter/xor_singleheader) implementation of [Xor Filters: Faster and Smaller Than Bloom and Cuckoo Filters](https://arxiv.org/abs/1912.08258)
-and of [Binary Fuse Filters: Fast and Smaller Than Xor Filters](https://arxiv.org/abs/2201.01174).
-
-If you have sets using much memory (e.g., thousands or millions of URLs) and you want to
-quickly filter out elements that are not in the set, these filters offer both great
-performance, and a small memory usage.
+If you work with large sets—such as thousands or millions of URLs, user IDs, or other keys—and need to quickly check whether an element is present, these filters provide exceptional speed and minimal memory usage. They are ideal for applications where you want to efficiently exclude elements not in your set, with much lower overhead than traditional approaches like sets or even Bloom filters.
 
 
 ## Installation
@@ -20,8 +15,7 @@ performance, and a small memory usage.
 
 
 
-The filters Xor8 and Fuse8 use slightly over a byte of memory per entry, with a false positive rate of about 0.39%.
-The filters Xor16 and Fuse16 use slightly over two bytes of memory per entry, with a false positive rate of about 0.0015%. For large sets, Fuse8 and Fuse16 filters use slightly more memory and they can be built
+The filters Xor8 and Fuse8 use slightly over a byte of memory per entry, with a false positive rate of about 0.39%. The filters Xor16 and Fuse16 use slightly over two bytes of memory per entry, with a false positive rate of about 0.0015%. For large sets, Fuse8 and Fuse16 filters use slightly more memory and they can be built
 faster.
 
 
