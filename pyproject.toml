@@ -1,13 +1,17 @@
+[tool.setuptools]
+py-modules = []
+# cffi-modules handled in setup.py
 [project]
 name = "pyfusefilter"
 version = "1.0.1"
-description = "Python bindings for C implementation of xorfilter"
+description = "Python bindings for C implementation of xor and fuse filters"
 authors = [
     {name = "Amey Narkhede", email = "ameynarkhede02@gmail.com"},
+    {name = "Daniel Lemire", email = "daniel@lemire.me"},
 ]
 dependencies = ["cffi", "xxhash"]
 readme = "README.md"
-license = {text = "Apache 2.0"}
+license = "Apache-2.0"
 requires-python = ">=3.0"
 
 [project.urls]
@@ -35,5 +39,3 @@ before-all = "apt-get -y install libffi-dev"
 select = "*-musllinux*"
 before-all = "apk add libffi-dev"
 
-[tool.setuptools]
-py-modules = []

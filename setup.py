@@ -10,11 +10,11 @@ setup(
     author="Amey Narkhede",
     author_email="ameynarkhede02@gmail.com",
     url="https://github.com/glitzflitz/pyfusefilter",
-    license="Apache 2.0",
+    # license handled in pyproject.toml
     python_requires=">=3.0",
     packages=find_packages(),
     ext_package="pyfusefilter",
-    install_requires=["cffi","xxhash"],
+    # install_requires handled in pyproject.toml
     cffi_modules=["pyfusefilter/ffibuild.py:ffi"],
 )
 

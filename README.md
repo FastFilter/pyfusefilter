@@ -3,21 +3,26 @@
 Python bindings for [C](https://github.com/FastFilter/xor_singleheader) implementation of [Xor Filters: Faster and Smaller Than Bloom and Cuckoo Filters](https://arxiv.org/abs/1912.08258)
 and of [Binary Fuse Filters: Fast and Smaller Than Xor Filters](https://arxiv.org/abs/2201.01174).
 
+If you have sets using much memory (e.g., thousands or millions of URLs) and you want to
+quickly filter out elements that are not in the set, these filters offer both great
+performance, and a small memory usage.
 
 
 ## Installation
 `pip install pyfusefilter`
-### From Source
-```
-git clone --recurse-submodules https://github.com/glitzflitz/pyfusefilter
-cd pyfusefilter
-python setup.py build_ext
-python setup.py install
-```
+
+
+
+
+
 ## Usage
 
+
+See our [API documentation](docs/index.html).
+
 The filters Xor8 and Fuse8 use slightly over a byte of memory per entry, with a false positive rate of about 0.39%.
-The filters Xor16 and Fuse16 use slightly over two bytes of memory per entry, with a false positive rate of about 0.0015%.
+The filters Xor16 and Fuse16 use slightly over two bytes of memory per entry, with a false positive rate of about 0.0015%. For large sets, Fuse8 and Fuse16 filters use slightly more memory and they can be built
+faster.
 
 
 
@@ -26,8 +31,7 @@ The filters Xor16 and Fuse16 use slightly over two bytes of memory per entry, wi
 >>> 
 >>> #Supports unicode strings and heterogeneous types
 >>> test_str = ["あ","अ", 51, 0.0, 12.3]
->>> filter = Xor8(len(test_str))	#or Xor16(size)
->>> filter.populate(test_str)
+>>> filter = Xor8(test_str)	
 True
 >>> filter.contains("अ")
 True
@@ -41,6 +45,10 @@ False
 60
 ```
 
+
+The `size_in_bytes()` function gives the memory usage of the filter itself. It does not count
+the Python overhead which adds a few bytes to the actual memory usage.
+
 You can serialize a filter with the `serialize()` method which returns a buffer, and you can recover the filter with the `deserialize(buffer)` method, which returns a filter:
 
 ```py
@@ -50,20 +58,25 @@ You can serialize a filter with the `serialize()` method which returns a buffer,
 > recoverfilter = Xor8.deserialize(open('/tmp/output', 'rb').read())
 ```
 
+The serialization format is as concise as possible and will typically use a few bytes
+less than `size_in_bytes()`.
+
 ## Measuring data usage
 
-The `size_in_bytes()` function gives the memory usage of the filter itself. The actual memory usage is slightly higher (there is a small constant overhead) due to
+ The actual memory usage is slightly higher (there is a small constant overhead) due to
 Python metadata.
 
 ```python
-    from pyfusefilter import Xor8, Fuse8
+from pyfusefilter import Xor8, Fuse8
 
-    N = 100
-    while (N < 10000000):
-        filter = Xor8(len(data))
-        fusefilter = Fuse8(len(data))
-        print(N, filter.size_in_bytes()/N, fusefilter.size_in_bytes()/N)
-        N *= 10
+N = 100
+while (N < 10000000):
+    # filters can be initialized with an integer, the memory is allocated, but unused.
+    # call 'populate' to fill them with data.
+    filter = Xor8(len(data))
+    fusefilter = Fuse8(len(data))
+    print(N, filter.size_in_bytes()/N, fusefilter.size_in_bytes()/N)
+    N *= 10
 
 ```
 
@@ -82,6 +95,44 @@ For large sets (contain millions of keys), Fuse8/Fuse16 filters are faster and s
 1130536
 ```
 
+### From Source
+
+Assuming that your Python interpreter is called `python`.
+
+```bash
+# Clone the repository with submodules
+git clone --recurse-submodules https://github.com/glitzflitz/pyfusefilter
+cd pyfusefilter
+
+# If you forgot --recurse-submodules, initialize submodules now
+git submodule update --init --recursive
+
+# Create and activate virtual environment
+python -m venv pyfuseenv
+source pyfuseenv/bin/activate  # On Windows: pyfuseenv\Scripts\activate
+
+# Install build dependencies
+python -m pip install setuptools wheel cffi xxhash
+
+# Build the CFFI extension
+python setup.py build_ext
+
+# Install the package
+python setup.py install
+
+# Optional: Run tests to verify installation
+python -m pip install pytest
+python -m pytest tests/ -v
+
+# Generate documentation
+python -m pip install pdoc
+python -m pdoc pyfusefilter --output-dir docs
+```
+
+**Notes:**
+- The build process compiles C code using your system's C compiler
+- On macOS, you may need to install Xcode command line tools: `xcode-select --install`
+- On Linux, install development headers: `apt-get install python3-dev` (Ubuntu/Debian) or `yum install python3-devel` (CentOS/RHEL)
 
 
 ## References

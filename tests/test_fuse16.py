@@ -3,6 +3,14 @@ from random import sample
 import tempfile, os
 
 
+def test_readme():
+    test_str = ["あ","अ", 51, 0.0, 12.3]
+    filter = Fuse16(test_str)
+    assert filter.contains("अ") == True
+    assert filter[51]  #You can use __getitem__ instead of contains
+    assert filter["か"] == False
+    assert filter.contains(150) == False
+
 def test_fuse16_int():
     xor_filter = Fuse16(50)
     xor_filter.populate([_ for _ in range(50)])

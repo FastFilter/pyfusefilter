@@ -2,6 +2,13 @@ from pyfusefilter import Xor16
 import random
 import tempfile, os
 
+def test_readme():
+    test_str = ["あ","अ", 51, 0.0, 12.3]
+    filter = Xor16(test_str)
+    assert filter.contains("अ") == True
+    assert filter[51]  #You can use __getitem__ instead of contains
+    assert filter["か"] == False
+    assert filter.contains(150) == False
 
 def test_xor16_int():
     xor_filter = Xor16(100)
