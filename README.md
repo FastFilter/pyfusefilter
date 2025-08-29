@@ -133,19 +133,6 @@ python -m pdoc pyfusefilter --output-dir docs
 - On Linux, install development headers: `apt-get install python3-dev` (Ubuntu/Debian) or `yum install python3-devel` (CentOS/RHEL)
 
 
-## Documentation
-
-📚 **Live Documentation**: [https://fastfilter.github.io/pyfusefilter/](https://fastfilter.github.io/pyfusefilter/)
-
-The documentation is automatically generated from the code using [pdoc](https://pdoc.dev/) and deployed to GitHub Pages on every push to the main branch.
-
-### Setting up GitHub Pages
-
-To enable GitHub Pages for this repository:
-
-1. Go to **Settings** → **Pages**
-2. Under **Source**, select **GitHub Actions**
-3. The documentation will be available at: `https://fastfilter.github.io/pyfusefilter/`
 
 ### Local Documentation
 
