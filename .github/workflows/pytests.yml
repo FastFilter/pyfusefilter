@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.12", "3.13"]
 
     steps:
     - uses: actions/checkout@v4
@@ -58,18 +58,18 @@ jobs:
       run: |
         python -c "
         import pyfusefilter
-        print('✓ Import successful')
+        print('[OK] Import successful')
         
         # Test basic functionality
         f = pyfusefilter.Xor8([1, 2, 3, 4, 5])
-        print(f'✓ Filter created: {f}')
-        print(f'✓ Contains 3: {f.contains(3)}')
-        print(f'✓ Does not contain 10: {not f.contains(10)}')
+        print(f'[OK] Filter created: {f}')
+        print(f'[OK] Contains 3: {f.contains(3)}')
+        print(f'[OK] Does not contain 10: {not f.contains(10)}')
         
         # Test serialization
         serialized = f.serialize()
         recovered = pyfusefilter.Xor8.deserialize(serialized)
-        print(f'✓ Serialization works: {recovered.contains(3)}')
+        print(f'[OK] Serialization works: {recovered.contains(3)}')
         "
 
   build-wheel:

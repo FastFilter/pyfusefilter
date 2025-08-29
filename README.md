@@ -12,10 +12,12 @@ performance, and a small memory usage.
 `pip install pyfusefilter`
 
 
+## API
 
-
+[API Documentation](https://fastfilter.github.io/pyfusefilter/docs/pyfusefilter.html)
 
 ## Usage
+
 
 
 The filters Xor8 and Fuse8 use slightly over a byte of memory per entry, with a false positive rate of about 0.39%.
