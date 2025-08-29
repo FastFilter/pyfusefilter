@@ -45,8 +45,8 @@ name = "pyfusefilter"
 description = "Python bindings for C implementation of xor and fuse filters"
 version = "1.0.1"
 author = "Amey Narkhede & Daniel Lemire"
-author_email = "ameynarkhede02@gmail.com"
-url = "https://github.com/glitzflitz/pyfusefilter"
+author_email = "daniel@lemire.me"
+url = "https://github.com/FastFilter/pyfusefilter"
 
 # Documentation settings
 docstring_style = "google"

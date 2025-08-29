@@ -7,9 +7,9 @@ setup(
     description="Python bindings for C implementation of xorfilter",
     long_description=open("README.md", "r", encoding='utf-8').read(),
     long_description_content_type="text/markdown",
-    author="Amey Narkhede",
-    author_email="ameynarkhede02@gmail.com",
-    url="https://github.com/glitzflitz/pyfusefilter",
+    author="Amey Narkhede & Daniel Lemire",
+    author_email="daniel@lemire.me",
+    url="https://github.com/FastFilter/pyfusefilter",
     # license handled in pyproject.toml
     python_requires=">=3.0",
     packages=find_packages(),

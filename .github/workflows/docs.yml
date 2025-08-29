@@ -51,7 +51,7 @@ jobs:
 
     - name: Generate documentation
       run: |
-        pdoc pyfusefilter --output-dir docs --html --force --show-source --search --docformat google
+        pdoc pyfusefilter --output-dir docs --show-source --search --docformat google
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
