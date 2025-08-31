@@ -44,6 +44,14 @@ class Xor8:
         """
         return self.contains(item)
 
+    def __contains__(self, item):
+        """
+        Check if the item is in the filter. With a small probability, the filter
+        may return true for an item not in the set (false positive). There is
+        no false negative: if the filter returns false, the item is definitely not in the set.
+        """
+        return self.contains(item)
+
     def __del__(self):
         lib.xor8_free(self.__filter)
 
@@ -126,6 +134,14 @@ class Xor16:
         return "Xor16 object with size(in bytes):{}".format(self.size_in_bytes())
 
     def __getitem__(self, item):
+        """
+        Check if the item is in the filter. With a small probability, the filter
+        may return true for an item not in the set (false positive). There is
+        no false negative: if the filter returns false, the item is definitely not in the set.
+        """
+        return self.contains(item)
+
+    def __contains__(self, item):
         """
         Check if the item is in the filter. With a small probability, the filter
         may return true for an item not in the set (false positive). There is
@@ -224,6 +240,14 @@ class Fuse8:
         """
         return self.contains(item)
 
+    def __contains__(self, item):
+        """
+        Check if the item is in the filter. With a small probability, the filter
+        may return true for an item not in the set (false positive). There is
+        no false negative: if the filter returns false, the item is definitely not in the set.
+        """
+        return self.contains(item)
+
     def __del__(self):
         """
         Free the memory allocated for the Fuse8 filter.
@@ -308,6 +332,14 @@ class Fuse16:
         return "Fuse16 object with size(in bytes):{}".format(self.size_in_bytes())
 
     def __getitem__(self, item):
+        """
+        Check if the item is in the filter. With a small probability, the filter
+        may return true for an item not in the set (false positive). There is
+        no false negative: if the filter returns false, the item is definitely not in the set.
+        """
+        return self.contains(item)
+
+    def __contains__(self, item):
         """
         Check if the item is in the filter. With a small probability, the filter
         may return true for an item not in the set (false positive). There is

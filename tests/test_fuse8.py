@@ -8,7 +8,7 @@ def test_readme():
     assert filter.contains("अ") == True
     assert filter[51]  #You can use __getitem__ instead of contains
     assert filter["か"] == False
-    assert filter.contains(150) == False
+    assert 12.3 in filter  #You can use __contains__ instead of contains
 
 def test_fuse8_int():
     xor_filter = Fuse8(50)

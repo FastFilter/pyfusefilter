@@ -28,6 +28,7 @@ filter.contains("अ") # returns true
 # next returns true
 filter[51]  #You can use __getitem__ instead of contains
 filter["か"] # returns false
+12.3 in filter # returns true
 ```
 
 

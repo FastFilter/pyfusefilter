@@ -3,7 +3,7 @@ import os
 
 setup(
     name="pyfusefilter",
-    version="1.1.5",
+    version="1.2.0",
     description="Python bindings for C implementation of xorfilter",
     long_description=open("README.md", "r", encoding='utf-8').read(),
     long_description_content_type="text/markdown",
