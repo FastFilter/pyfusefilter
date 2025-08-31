@@ -4,7 +4,7 @@ import xxhash
 import struct
 
 def hash(item):
-    return xxhash.xxh64(str(item)).intdigest()
+    return xxhash.xxh64_intdigest(str(item))
 
 class Xor8:
     """
