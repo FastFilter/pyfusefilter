@@ -61,3 +61,12 @@ def test_fuse16_serialize():
         assert recover_xor_filter.contains(i)
 
     os.remove(serialized_filter)
+
+def test_fuse16_few_segments():
+    # https://github.com/FastFilter/xor_singleheader/issues/77
+    for size in (3551, 11504, 11521, 12372, 13224, 37454):
+        for _ in range(5):
+            keys = sample(range(1 << 62), size)
+            filter = Fuse16(keys)
+            for key in keys:
+                assert key in filter

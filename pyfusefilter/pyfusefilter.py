@@ -31,7 +31,8 @@ class Xor8:
                 raise MemoryError("Unable to allocate memory for filter")
             else:
                 data = list(map(lambda x: c_ulonglong((hash(x))).value, data))
-                lib.xor8_buffered_populate(data, len(data), self.__filter)
+                if not lib.xor8_buffered_populate(data, len(data), self.__filter):
+                    raise ValueError("Unable to populate the filter")
 
     def __repr__(self):
         return "Xor8 object with size(in bytes):{}".format(self.size_in_bytes())
@@ -125,7 +126,8 @@ class Xor16:
                 raise MemoryError("Unable to allocate memory for filter")
             else:
                 data = list(map(lambda x: c_ulonglong((hash(x))).value, data))
-                lib.xor16_buffered_populate(data, len(data), self.__filter)
+                if not lib.xor16_buffered_populate(data, len(data), self.__filter):
+                    raise ValueError("Unable to populate the filter")
 
     def __repr__(self):
         """
@@ -224,7 +226,8 @@ class Fuse8:
                 raise MemoryError("Unable to allocate memory for filter")
             else:
                 data = list(map(lambda x: c_ulonglong((hash(x))).value, data))
-                lib.binary_fuse8_populate(data, len(data), self.__filter)
+                if not lib.binary_fuse8_populate(data, len(data), self.__filter):
+                    raise ValueError("Unable to populate the filter")
 
     def __repr__(self):
         """
@@ -257,11 +260,15 @@ class Fuse8:
     def populate(self, data: list):
         """
         Set the data of the filter. You may use this method to add data after
-        allocating the filter with an integer size. The sizes should match.
-        You can reuse a filter with new data (i.e., call populate several times)
-        as long as the size remains a constant.
+        allocating the filter with an integer size. If the number of items
+        differs from the allocated size, the filter is reallocated.
+        You can reuse a filter with new data (i.e., call populate several times).
         """
         data = list(map(lambda x: c_ulonglong((hash(x))).value, data))
+        if len(data) != self.__filter.Size:
+            lib.binary_fuse8_free(self.__filter)
+            if not lib.binary_fuse8_allocate(len(data), self.__filter):
+                raise MemoryError("Unable to allocate memory for filter")
         return lib.binary_fuse8_populate(data, len(data), self.__filter)
 
     def contains(self, item):
@@ -323,7 +330,8 @@ class Fuse16:
                 raise MemoryError("Unable to allocate memory for filter")
             else:
                 data = list(map(lambda x: c_ulonglong((hash(x))).value, data))
-                lib.binary_fuse16_populate(data, len(data), self.__filter)
+                if not lib.binary_fuse16_populate(data, len(data), self.__filter):
+                    raise ValueError("Unable to populate the filter")
 
     def __repr__(self):
         """
@@ -356,11 +364,15 @@ class Fuse16:
     def populate(self, data: list):
         """
         Set the data of the filter. You may use this method to add data after
-        allocating the filter with an integer size. The sizes should match.
-        You can reuse a filter with new data (i.e., call populate several times)
-        as long as the size remains a constant.
+        allocating the filter with an integer size. If the number of items
+        differs from the allocated size, the filter is reallocated.
+        You can reuse a filter with new data (i.e., call populate several times).
         """
         data = list(map(lambda x: c_ulonglong((hash(x))).value, data))
+        if len(data) != self.__filter.Size:
+            lib.binary_fuse16_free(self.__filter)
+            if not lib.binary_fuse16_allocate(len(data), self.__filter):
+                raise MemoryError("Unable to allocate memory for filter")
         return lib.binary_fuse16_populate(data, len(data), self.__filter)
 
     def contains(self, item):

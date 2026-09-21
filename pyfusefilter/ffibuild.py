@@ -54,6 +54,7 @@ typedef struct xor16_s {
 
 typedef struct binary_fuse8_s {
   uint64_t Seed;
+  uint32_t Size;
   uint32_t SegmentLength;
   uint32_t SegmentLengthMask;
   uint32_t SegmentCount;
@@ -64,6 +65,7 @@ typedef struct binary_fuse8_s {
 
 typedef struct binary_fuse16_s {
   uint64_t Seed;
+  uint32_t Size;
   uint32_t SegmentLength;
   uint32_t SegmentLengthMask;
   uint32_t SegmentCount;
