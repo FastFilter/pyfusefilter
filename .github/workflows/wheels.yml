@@ -7,11 +7,6 @@ on:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 
-env:
-  CIBW_TEST_EXTRAS: test
-  CIBW_TEST_SKIP: "*_arm64 *_universal2:arm64"
-  CIBW_ARCHS_MACOS: "x86_64 universal2"
-
 jobs:
   sdist:
     name: Creating source release
@@ -32,26 +27,30 @@ jobs:
 
       - name: Building source distribution
         run: |
-          pip install -e ".[release]"
-          python setup.py sdist
+          python -m pip install build
+          python -m build --sdist
 
       - uses: actions/upload-artifact@v4
         with:
+          name: sdist-artifact
           path: dist/*.tar.gz
+          if-no-files-found: error
 
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # ubuntu-24.04-arm builds native aarch64 manylinux/musllinux wheels.
+        os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest, macos-latest]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
         with:
           submodules: true
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.11.2
+        uses: pypa/cibuildwheel@v4.3.5
         with:
           config-file: "{package}/pyproject-cibuildwheel.toml"
 
@@ -65,6 +64,8 @@ jobs:
     needs: [build_wheels, sdist]
     name: Uploading built packages to pypi for release.
     runs-on: ubuntu-latest
+    # Only upload to PyPI when triggered by a tag (not manual workflow_dispatch).
+    if: startsWith(github.ref, 'refs/tags/')
     steps:
     - uses: actions/download-artifact@v4
       with:
@@ -72,7 +73,7 @@ jobs:
         merge-multiple: true
     - name: List dist contents
       run: ls -l dist
-    - uses: pypa/gh-action-pypi-publish@v1.5.0
+    - uses: pypa/gh-action-pypi-publish@v1.13.0
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}

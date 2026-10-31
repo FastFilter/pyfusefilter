@@ -4,7 +4,9 @@ import xxhash
 import struct
 
 def hash(item):
-    return xxhash.xxh64_intdigest(str(item))
+    # xxhash 4 no longer accepts str; encoding as UTF-8 gives exactly the
+    # same hash values that earlier xxhash versions computed for str input.
+    return xxhash.xxh64_intdigest(str(item).encode("utf-8"))
 
 class Xor8:
     """
