@@ -1,5 +1,5 @@
 from pyfusefilter import Fuse16
-from random import sample
+from random import randrange
 import tempfile, os
 
 
@@ -66,7 +66,10 @@ def test_fuse16_few_segments():
     # https://github.com/FastFilter/xor_singleheader/issues/77
     for size in (3551, 11504, 11521, 12372, 13224, 37454):
         for _ in range(5):
-            keys = sample(range(1 << 62), size)
+            keys = set()
+            while len(keys) < size:
+                keys.add(randrange(1 << 62))
+            keys = list(keys)
             filter = Fuse16(keys)
             for key in keys:
                 assert key in filter
