@@ -14,8 +14,14 @@ with open("lib/xor_singleheader/include/binaryfusefilter.h", "r", encoding='utf-
   all_src += src.read()
 
 
+# Under Pyodide (WebAssembly), a wheel is tied to one Pyodide version anyway,
+# so the limited API (abi3) gains nothing; and Pyodide 315 names abi3
+# extensions with quotes (_xorfilter.abi3-"wasm32-emscripten".so), which
+# Python then cannot import.
+import sysconfig
 ffi.set_source(
   "_xorfilter", all_src,
+  py_limited_api=not sysconfig.get_platform().startswith("emscripten"),
 )
 
 ffi.cdef(
